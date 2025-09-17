@@ -1,0 +1,80 @@
+# dbo.VW_ADM_ITEMSFACTURA
+
+Vista: dbo.VW_ADM_ITEMSFACTURA
+Origen: dbo.VW_ADM_ITEMSFACTURA.sql
+
+## Columnas
+
+- CodSucu: Columna proveniente de `it.CodSucu`.
+- TipoFac: Columna proveniente de `it.TipoFac`.
+- NumeroD: Columna proveniente de `it.NumeroD`.
+- coditem: Columna proveniente de `it.coditem`.
+- signo: Columna proveniente de `it.signo`.
+- CodInst: Columna calculada a partir de la expresión `ISNULL(pr.codinst, sr.codinst)`.
+- Descrip1: Columna proveniente de `it.Descrip1`.
+- Descrip2: Columna proveniente de `it.Descrip2`.
+- Descrip3: Columna proveniente de `it.Descrip3`.
+- Descrip4: Columna proveniente de `it.Descrip4`.
+- Descrip5: Columna proveniente de `it.Descrip5`.
+- Descrip6: Columna proveniente de `it.Descrip6`.
+- Descrip7: Columna proveniente de `it.Descrip7`.
+- Descrip8: Columna proveniente de `it.Descrip8`.
+- Descrip9: Columna proveniente de `it.Descrip9`.
+- Descrip10: Columna proveniente de `it.Descrip10`.
+- nrolinea: Columna proveniente de `it.nrolinea`.
+- nrolineac: Columna proveniente de `it.nrolineac`.
+- EsServ: Columna proveniente de `it.EsServ`.
+- CodOper: Columna proveniente de `F.CodOper`.
+- CodClie: Columna proveniente de `F.CodClie`.
+- CodVend: Columna proveniente de `F.CodVend`.
+- CodUsua: Columna proveniente de `F.CodUsua`.
+- CodEsta: Columna proveniente de `F.CodEsta`.
+- CodMeca: Columna proveniente de `it.CodMeca`.
+- PriceO: Columna calculada a partir de la expresión `F.Signo * it.priceO`.
+- MtoTax: Columna calculada a partir de la expresión `F.Signo * It.MtoTax`.
+- Precio: Columna calculada a partir de la expresión `F.Signo * it.precio`.
+- TotPrecio: Columna calculada a partir de la expresión `F.Signo * it.Cantidad * (IT.Precio - ISNULL((F.Descto1 + F.Descto2) * IT.Precio / NULLIF (F.Monto + F.Descto1 + F.Descto2, 0), 0))`.
+- Utilidad: Columna calculada a partir de la expresión `F.Signo * IT.Cantidad * ((IT.Precio - ISNULL((F.Descto1 + F.Descto2) * IT.Precio / NULLIF (F.Monto + F.Descto1 + F.Descto2, 0), 0)) - IT.Costo)`.
+- EsUnid: Columna proveniente de `it.EsUnid`.
+- DEsComp: Columna proveniente de `it.DEsComp`.
+- EsExento: Columna proveniente de `it.EsExento`.
+- CantMayor: Columna proveniente de `it.CantMayor`.
+- Cantidad: Columna calculada a partir de la expresión `F.Signo * it.Cantidad`.
+- CantidadA: Columna proveniente de `it.CantidadA`.
+- codUbic: Columna proveniente de `it.codUbic`.
+- nroUnicoL: Columna proveniente de `it.nroUnicoL`.
+- Descto: Columna proveniente de `It.Descto`.
+- MtoTaxO: Columna proveniente de `it.MtoTaxO`.
+- Costo: Columna calculada a partir de la expresión `F.Signo * it.Costo`.
+- TotCosto: Columna calculada a partir de la expresión `F.Signo * It.Cantidad * it.Costo`.
+- NroLote: Columna calculada a partir de la expresión `ISNULL(it.NroLote, '')`.
+- fechaL: Columna proveniente de `it.fechaL`.
+- FechaVL: Columna renombrada a partir de `it.Fechav`.
+- FechaEF: Columna renombrada a partir de `F.FechaE`.
+- FechaVF: Columna renombrada a partir de `F.Fechav`.
+- ESFREEP: Columna calculada a partir de la expresión `(CASE SUBSTRING(ISNULL(PR.DESCRIP, sr.descrip), 1, 1) WHEN '?' THEN 1 ELSE 0 END)`.
+- ExActual: Columna calculada a partir de la expresión `ISNULL(IIF(it.esunid = 0, pr.Existen, pr.ExUnidad), 0)`.
+- DEsLote: Columna calculada a partir de la expresión `ISNULL(pr.DEsLote, 0)`.
+- DEsSeri: Columna calculada a partir de la expresión `ISNULL(pr.DEsSeri, 0)`.
+- DEsVence: Columna calculada a partir de la expresión `ISNULL(Pr.DEsVence, 0)`.
+- EsPesa: Columna calculada a partir de la expresión `ISNULL(pr.EsPesa, 0)`.
+- Tara: Columna calculada a partir de la expresión `ISNULL(pr.tara, 0)`.
+- FACTOR: Columna calculada a partir de la expresión `ISNULL(IIF(pr.factor = 0, 1, pr.factor), 1)`.
+- Unidad: Columna calculada a partir de la expresión `ISNULL(pr.Unidad, sr.Unidad)`.
+- UndEmpaq: Columna calculada a partir de la expresión `ISNULL(pr.undempaq, '')`.
+- CantEmpaq: Columna calculada a partir de la expresión `ISNULL(pr.cantempaq, 0)`.
+- ExDecimal: Columna calculada a partir de la expresión `ISNULL(pr.exdecimal, 0)`.
+- Refere: Columna calculada a partir de la expresión `ISNULL(pr.refere, sr.clase)`.
+- Precio1: Columna calculada a partir de la expresión `ISNULL(pr.precio1, sr.precio1)`.
+- Precio2: Columna calculada a partir de la expresión `ISNULL(pr.precio2, sr.precio2)`.
+- Precio3: Columna calculada a partir de la expresión `ISNULL(pr.precio3, sr.precio3)`.
+- PrecioU: Columna calculada a partir de la expresión `ISNULL(Pr.precioU, 0)`.
+- PrecioU2: Columna calculada a partir de la expresión `ISNULL(PR.Preciou2, 0)`.
+- PrecioU3: Columna calculada a partir de la expresión `ISNULL(PR.Preciou3, 0)`.
+- Peso: Columna calculada a partir de la expresión `ISNULL(PR.Peso, 0)`.
+- Volumen: Columna calculada a partir de la expresión `ISNULL(PR.Volumen, 0)`.
+- UndVol: Columna calculada a partir de la expresión `ISNULL(PR.UndVol, '')`.
+- CostPro: Columna calculada a partir de la expresión `ISNULL(pr.costpro, sr.costo)`.
+- CostAct: Columna calculada a partir de la expresión `ISNULL(pr.costAct, sr.costo)`.
+- EsImport: Columna calculada a partir de la expresión `ISNULL(pr.esImport, sr.EsImport)`.
+- UsaServ: Columna calculada a partir de la expresión `ISNULL(0, sr.UsaServ)`.
