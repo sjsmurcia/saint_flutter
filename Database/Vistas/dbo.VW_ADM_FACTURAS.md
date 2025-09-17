@@ -1,0 +1,89 @@
+# dbo.VW_ADM_FACTURAS
+
+Vista: dbo.VW_ADM_FACTURAS
+Origen: dbo.VW_ADM_FACTURAS.sql
+
+## Columnas
+
+- CodSucu: Columna proveniente de `CodSucu`.
+- TipoFac: Columna proveniente de `TipoFac`.
+- NumeroD: Columna proveniente de `NumeroD`.
+- CodEsta: Columna proveniente de `CodEsta`.
+- CodUsua: Columna proveniente de `CodUsua`.
+- NumeroC: Columna proveniente de `NumeroC`.
+- NumeroR: Columna proveniente de `NumeroR`.
+- NumeroF: Columna proveniente de `NumeroF`.
+- NumeroP: Columna proveniente de `NumeroP`.
+- CodVend: Columna proveniente de `CodVend`.
+- Signo: Columna proveniente de `Signo`.
+- CodClie: Columna proveniente de `CodClie`.
+- Descrip: Columna proveniente de `Descrip`.
+- ID3: Columna proveniente de `ID3`.
+- Direc1: Columna proveniente de `Direc1`.
+- Direc2: Columna proveniente de `Direc2`.
+- Direc3: Columna proveniente de `Direc3`.
+- NroTurno: Columna proveniente de `NroTurno`.
+- ZipCode: Columna proveniente de `ZipCode`.
+- Telef: Columna proveniente de `Telef`.
+- FechaT: Columna proveniente de `FechaT`.
+- FechaE: Columna proveniente de `FechaE`.
+- FechaV: Columna proveniente de `FechaV`.
+- FechaI: Columna proveniente de `FechaI`.
+- TotalPrd: Columna calculada a partir de la expresión `Signo * TotalPrd`.
+- TotalSrv: Columna calculada a partir de la expresión `Signo * TotalSrv`.
+- TGravable: Columna calculada a partir de la expresión `Signo * (TGravable + TGravable0)`.
+- TExento: Columna calculada a partir de la expresión `Signo * TExento`.
+- Monto: Columna calculada a partir de la expresión `Signo * Monto`.
+- Monto_Descto: Columna calculada a partir de la expresión `Signo * (Descto1 + Descto2)`.
+- MtoTax: Columna calculada a partir de la expresión `Signo * MtoTax`.
+- Fletes: Columna calculada a partir de la expresión `Signo * Fletes`.
+- Monto_Neto: Columna calculada a partir de la expresión `Signo * Monto`.
+- Monto_Bruto: Columna calculada a partir de la expresión `Signo * (Monto + MtoTax + Fletes)`.
+- MontoTotal: Columna calculada a partir de la expresión `Signo * MtoTotal`.
+- MtoExtra: Columna calculada a partir de la expresión `Signo * MtoExtra`.
+- MtoFinanc: Columna calculada a partir de la expresión `Signo * MtoFinanc`.
+- Credito: Columna calculada a partir de la expresión `Signo * Credito`.
+- Contado: Columna calculada a partir de la expresión `Signo * Contado`.
+- CancelI: Columna calculada a partir de la expresión `Signo * CancelI`.
+- CancelA: Columna calculada a partir de la expresión `Signo * CancelA`.
+- CancelE: Columna calculada a partir de la expresión `Signo * CancelE`.
+- CancelC: Columna calculada a partir de la expresión `Signo * CancelC`.
+- CancelT: Columna calculada a partir de la expresión `Signo * CancelT`.
+- CancelG: Columna calculada a partir de la expresión `Signo * CancelG`.
+- Descto1: Columna calculada a partir de la expresión `Signo * Descto1`.
+- Descto2: Columna calculada a partir de la expresión `Signo * Descto2`.
+- CostoPrd: Columna calculada a partir de la expresión `Signo * CostoPrd`.
+- CostoSrv: Columna calculada a partir de la expresión `Signo * CostoSrv`.
+- Monto_Costo: Columna calculada a partir de la expresión `Signo * (CostoPrd + CostoSrv)`.
+- DesctoP: Columna calculada a partir de la expresión `Signo * DesctoP`.
+- RetenIVA: Columna calculada a partir de la expresión `Signo * RetenIVA`.
+- Cambio: Columna calculada a partir de la expresión `Signo * Cambio`.
+- Monto_Utili: Columna calculada a partir de la expresión `Signo * (Monto - (CostoPrd + CostoSrv))`.
+- Monto_PorUtil: Columna calculada a partir de la expresión `Signo * COALESCE ((Monto - (CostoPrd + CostoSrv)) / NULLIF (Monto, 0) * 100, 0)`.
+- Monto_PorComi: Columna calculada a partir de la expresión `Signo * COALESCE ((Monto - (MtoComiVta + MtoComiVtaD)) / NULLIF (Monto, 0) * 100, 0)`.
+- Monto_PorComiCob: Columna calculada a partir de la expresión `Signo * COALESCE ((Contado - (MtoComiCob + MtoComiCobD)) / NULLIF (Contado * 100, 0), 0)`.
+- MtoComiVta: Columna calculada a partir de la expresión `Signo * MtoComiVta`.
+- MtoComiCob: Columna calculada a partir de la expresión `Signo * MtoComiCob`.
+- MtoComiVtaD: Columna calculada a partir de la expresión `Signo * MtoComiVtaD`.
+- MtoComiCobD: Columna calculada a partir de la expresión `Signo * MtoComiCobD`.
+- TotMtoComiVta: Columna calculada a partir de la expresión `Signo * (MtoComiVta + MtoComiVtaD)`.
+- TotMtoComiCob: Columna calculada a partir de la expresión `Signo * (MtoComiCob + MtoComiCobD)`.
+- CodUbic: Columna proveniente de `CodUbic`.
+- OrdenC: Columna proveniente de `OrdenC`.
+- CodOper: Columna proveniente de `CodOper`.
+- DetalChq: Columna proveniente de `DetalChq`.
+- NGiros: Columna proveniente de `NGiros`.
+- NMeses: Columna proveniente de `NMeses`.
+- NroCtrol: Columna proveniente de `NroCtrol`.
+- Notas1: Columna proveniente de `Notas1`.
+- Notas2: Columna proveniente de `Notas2`.
+- Notas3: Columna proveniente de `Notas3`.
+- Notas4: Columna proveniente de `Notas4`.
+- Notas5: Columna proveniente de `Notas5`.
+- Notas6: Columna proveniente de `Notas6`.
+- Notas7: Columna proveniente de `Notas7`.
+- Notas8: Columna proveniente de `Notas8`.
+- Notas9: Columna proveniente de `Notas9`.
+- Notas10: Columna proveniente de `Notas10`.
+- MtoInt1: Columna calculada a partir de la expresión `Signo * MtoInt1`.
+- MtoInt2: Columna calculada a partir de la expresión `Signo * MtoInt2`.

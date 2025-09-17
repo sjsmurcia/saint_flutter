@@ -1,0 +1,77 @@
+# dbo.VW_ADM_PRODUCTOSTAX
+
+Vista: dbo.VW_ADM_PRODUCTOSTAX
+Origen: dbo.VW_ADM_PRODUCTOSTAX.sql
+
+## Columnas
+
+- DEsComi: Columna proveniente de `I.DEsComi`.
+- DEsCorrel: Columna proveniente de `I.DEsCorrel`.
+- DigitosC: Columna proveniente de `I.DigitosC`.
+- Descto: Columna proveniente de `I.Descto`.
+- CodInst: Columna proveniente de `I.CodInst`.
+- CodProd: Columna proveniente de `P.CodProd`.
+- Descrip: Columna proveniente de `P.Descrip`.
+- Descrip2: Columna proveniente de `P.Descrip2`.
+- Descrip3: Columna proveniente de `P.Descrip3`.
+- DescripAll: Columna calculada a partir de la expresión `P.Descrip + COALESCE (' ' + P.Descrip2, '') + COALESCE (' ' + P.Descrip3, '')`.
+- ESFREEP: Columna calculada a partir de la expresión `(CASE SUBSTRING(P.DESCRIP, 1, 1) WHEN '?' THEN 1 ELSE 0 END)`.
+- costact: Columna proveniente de `p.costact`.
+- costoacttx: Columna calculada a partir de la expresión `(p.costact + isnull(tx.mtofijo, 0) + p.costact * isnull(tx.mtotax, 0))`.
+- costpro: Columna proveniente de `p.costpro`.
+- costoprotx: Columna calculada a partir de la expresión `(p.costpro + isnull(tx.mtofijo, 0) + p.costpro * isnull(tx.mtotax, 0))`.
+- costant: Columna proveniente de `p.costant`.
+- costoanttx: Columna calculada a partir de la expresión `(p.costant + isnull(tx.mtofijo, 0) + p.costant * isnull(tx.mtotax, 0))`.
+- Precio1: Columna proveniente de `P.Precio1`.
+- preciotx1: Columna calculada a partir de la expresión `(p.precio1 + isnull(tx.mtofijo, 0) + p.precio1 * isnull(tx.mtotax, 0))`.
+- PrecioI1: Columna proveniente de `P.PrecioI1`.
+- Precio2: Columna proveniente de `P.Precio2`.
+- preciotx2: Columna calculada a partir de la expresión `(p.precio2 + isnull(tx.mtofijo, 0) + p.precio2 * isnull(tx.mtotax, 0))`.
+- PrecioI2: Columna proveniente de `P.PrecioI2`.
+- Precio3: Columna proveniente de `P.Precio3`.
+- preciotx3: Columna calculada a partir de la expresión `(p.precio3 + isnull(tx.mtofijo, 0) + p.precio3 * isnull(tx.mtotax, 0))`.
+- PrecioI3: Columna proveniente de `P.PrecioI3`.
+- preciou1: Columna renombrada a partir de `P.PrecioU`.
+- precioUtx1: Columna calculada a partir de la expresión `(p.precioU + isnull(tx.mtofijo / iif(p.cantempaq = 0, 1, p.cantempaq), 0) + p.precioU * isnull(tx.mtotax, 0))`.
+- PrecioIU1: Columna proveniente de `P.PrecioIU1`.
+- Preciou2: Columna proveniente de `P.Preciou2`.
+- precioUtx2: Columna calculada a partir de la expresión `(p.precioU2 + isnull(tx.mtofijo / iif(p.cantempaq = 0, 1, p.cantempaq), 0) + p.precioU2 * isnull(tx.mtotax, 0))`.
+- PrecioIU2: Columna proveniente de `P.PrecioIU2`.
+- Preciou3: Columna proveniente de `P.Preciou3`.
+- precioUtx3: Columna calculada a partir de la expresión `(p.precioU3 + isnull(tx.mtofijo / iif(p.cantempaq = 0, 1, p.cantempaq), 0) + p.precioU3 * isnull(tx.mtotax, 0))`.
+- PrecioIU3: Columna proveniente de `P.PrecioIU3`.
+- EsReten: Columna proveniente de `P.EsReten`.
+- fechaUV: Columna proveniente de `P.fechaUV`.
+- FechaUC: Columna proveniente de `p.FechaUC`.
+- DiasTole: Columna proveniente de `P.DiasTole`.
+- Refere: Columna proveniente de `P.Refere`.
+- Marca: Columna proveniente de `P.Marca`.
+- Unidad: Columna proveniente de `P.Unidad`.
+- ACTIVO: Columna proveniente de `P.ACTIVO`.
+- UndEmpaq: Columna proveniente de `P.UndEmpaq`.
+- CantEmpaq: Columna proveniente de `P.CantEmpaq`.
+- Peso: Columna proveniente de `P.Peso`.
+- Factor: Columna proveniente de `P.Factor`.
+- PriceEx: Columna proveniente de `P.PriceEx`.
+- Volumen: Columna proveniente de `P.Volumen`.
+- UndVol: Columna proveniente de `P.UndVol`.
+- Existen: Columna proveniente de `P.Existen`.
+- ExUnidad: Columna proveniente de `P.ExUnidad`.
+- CantCom: Columna calculada a partir de la expresión `ISNULL(E.CantCom, 0)`.
+- CantPed: Columna calculada a partir de la expresión `ISNULL(E.CantPed, 0)`.
+- UnidCom: Columna calculada a partir de la expresión `ISNULL(E.UnidCom, 0)`.
+- UnidPed: Columna calculada a partir de la expresión `ISNULL(E.UnidPed, 0)`.
+- Minimo: Columna proveniente de `P.Minimo`.
+- Maximo: Columna proveniente de `P.Maximo`.
+- DEsVence: Columna proveniente de `P.DEsVence`.
+- EsPesa: Columna proveniente de `P.EsPesa`.
+- Tara: Columna proveniente de `P.Tara`.
+- EsImport: Columna proveniente de `P.EsImport`.
+- EsExento: Columna proveniente de `P.EsExento`.
+- EsOferta: Columna proveniente de `P.EsOferta`.
+- EsEnser: Columna proveniente de `P.EsEnser`.
+- EsEmpaque: Columna proveniente de `P.EsEmpaque`.
+- ExDecimal: Columna proveniente de `P.ExDecimal`.
+- DEsComp: Columna proveniente de `P.DEsComp`.
+- DEsSeri: Columna proveniente de `P.DEsSeri`.
+- DEsLote: Columna proveniente de `P.DEsLote`.
