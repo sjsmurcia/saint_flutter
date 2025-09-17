@@ -1,0 +1,44 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SAAGRUPOS]    Script Date: 24/08/2025 9:47:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SAAGRUPOS](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodTbl] [varchar](20) NOT NULL,
+	[NumGrp] [int] NOT NULL,
+	[NombreGrp] [varchar](50) NOT NULL,
+	[AliasGrp] [varchar](50) NOT NULL,
+	[EsTrans] [smallint] NOT NULL,
+	[NMeses] [int] NOT NULL,
+	[NMovim] [int] NOT NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SAAGRUPOS] ADD  DEFAULT ((0)) FOR [NumGrp]
+GO
+
+ALTER TABLE [dbo].[SAAGRUPOS] ADD  DEFAULT ((0)) FOR [EsTrans]
+GO
+
+ALTER TABLE [dbo].[SAAGRUPOS] ADD  DEFAULT ((0)) FOR [NMeses]
+GO
+
+ALTER TABLE [dbo].[SAAGRUPOS] ADD  DEFAULT ((0)) FOR [NMovim]
+GO
+
+ALTER TABLE [dbo].[SAAGRUPOS] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+

@@ -1,0 +1,23 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SAPAIS]    Script Date: 24/08/2025 20:09:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SAPAIS](
+	[Pais] [int] NOT NULL,
+	[SortName] [nvarchar](3) NOT NULL,
+	[Descrip] [nvarchar](40) NOT NULL,
+	[PhoneCode] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Pais] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

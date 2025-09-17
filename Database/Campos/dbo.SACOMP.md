@@ -1,0 +1,94 @@
+﻿# dbo.SACOMP
+
+Tabla: dbo.SACOMP
+Origen: dbo.SACOMP.sql
+
+## Campos
+
+- NroUnico (int): NÃºmero Ãºnico/autoincremental de la transacciÃ³n o documento.
+- CodSucu (varchar(5)): CÃ³digo de sucursal.
+- TipoCom (varchar(1)): Campo TipoCom (varchar(1)).
+- NumeroD (varchar(20)): NÃºmero de documento principal.
+- CodProv (varchar(15)): CÃ³digo de proveedor.
+- FromTran (int): Campo FromTran (int).
+- NroCtrol (varchar(20)): NÃºmero de control fiscal.
+- CodEsta (varchar(10)): CÃ³digo de establecimiento/estado.
+- CodUsua (varchar(10)): CÃ³digo de usuario.
+- Signo (smallint): Campo Signo (smallint).
+- FechaT (datetime): Fecha de transacciÃ³n.
+- OTipo (varchar(1)): Campo OTipo (varchar(1)).
+- ONumero (varchar(20)): Campo ONumero (varchar(20)).
+- NumeroP (varchar(20)): NÃºmero de pedido o pago.
+- NumeroE (varchar(20)): NÃºmero de documento o referencia
+- NumeroC (varchar(20)): NÃºmero de documento o referencia
+- NumeroN (varchar(20)): NÃºmero de documento o referencia
+- NumeroR (varchar(20)): NÃºmero de recibo o referencia.
+- TipoSus (smallint): Campo TipoSus (smallint).
+- TipoTraE (smallint): Tipo de transacciÃ³n/estado externo.
+- NroEstable (varchar(10)): NÃºmero de establecimiento.
+- PtoEmision (varchar(10)): Punto de emisiÃ³n fiscal.
+- AutSRI (varchar(80)): CÃ³digo/clave de autorizaciÃ³n fiscal (SRI).
+- FechaP (datetime): Fecha asociada al registro.
+- CodTarj (varchar(10)): CÃ³digo de tarjeta.
+- Moneda (varchar(5)): CÃ³digo o clave de moneda.
+- Factor (decimal(28, 4)): Factor de conversiÃ³n (p. ej., tasa de cambio).
+- MontoMEx (decimal(28, 4)): Monto/valor monetario asociado.
+- CodUbic (varchar(10)): CÃ³digo de ubicaciÃ³n.
+- Descrip (varchar(60)): DescripciÃ³n del registro.
+- Direc1 (varchar(60)): DirecciÃ³n lÃ­nea 1.
+- Direc2 (varchar(60)): DirecciÃ³n lÃ­nea 2.
+- ZipCode (varchar(20)): CÃ³digo postal.
+- Telef (varchar(30)): TelÃ©fono de contacto.
+- ID3 (varchar(25)): IdentificaciÃ³n fiscal (RUC/CI/NIT) del tercero.
+- Monto (decimal(28, 4)): Monto/valor monetario asociado.
+- OtrosC (decimal(28, 4)): Campo OtrosC (decimal(28, 4)).
+- MtoTax (decimal(28, 4)): Monto/valor monetario asociado.
+- Fletes (decimal(28, 4)): Monto de fletes/transporte.
+- TGravable (decimal(28, 4)): Base imponible (0% o general segÃºn sufijo).
+- TGravable0 (decimal(28, 4)): Base imponible (0% o general segÃºn sufijo).
+- TExento (decimal(28, 4)): Base exenta de impuestos.
+- DesctoP (decimal(28, 4)): Campo DesctoP (decimal(28, 4)).
+- RetenIVA (decimal(28, 4)): Monto retenido de IVA/impuesto.
+- FechaI (datetime): Fecha de inicio.
+- FechaR (datetime): Fecha de registro/recepciÃ³n.
+- FechaE (datetime): Fecha de emisiÃ³n/entrada.
+- FechaV (datetime): Fecha de vencimiento.
+- CancelI (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelE (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelT (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelC (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelA (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelG (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- MtoTotal (decimal(28, 4)): Monto/valor monetario asociado.
+- Contado (decimal(28, 4)): Campo Contado (decimal(28, 4)).
+- Credito (decimal(28, 4)): Campo Credito (decimal(28, 4)).
+- SaldoAct (decimal(28, 4)): Saldo asociado (moneda base), segÃºn contexto.
+- MtoPagos (decimal(28, 4)): Monto/valor monetario asociado.
+- MtoNCredito (decimal(28, 4)): Monto/valor monetario asociado.
+- MtoNDebito (decimal(28, 4)): Monto/valor monetario asociado.
+- Descto1 (decimal(28, 4)): Campo Descto1 (decimal(28, 4)).
+- MtoInt1 (decimal(28, 4)): Monto/valor monetario asociado.
+- Descto2 (decimal(28, 4)): Campo Descto2 (decimal(28, 4)).
+- MtoInt2 (decimal(28, 4)): Monto/valor monetario asociado.
+- MtoFinanc (decimal(28, 4)): Monto/valor monetario asociado.
+- DetalChq (varchar(40)): Campo DetalChq (varchar(40)).
+- TotalPrd (decimal(28, 4)): Campo TotalPrd (decimal(28, 4)).
+- TotalSrv (decimal(28, 4)): Campo TotalSrv (decimal(28, 4)).
+- OrdenC (varchar(30)): Campo OrdenC (varchar(30)).
+- CodOper (varchar(10)): CÃ³digo de operaciÃ³n.
+- NGiros (int): Campo NGiros (int).
+- NMeses (int): Campo NMeses (int).
+- Notas1 (varchar(60)): Observaciones/notas del documento.
+- Notas2 (varchar(60)): Observaciones/notas del documento.
+- Notas3 (varchar(60)): Observaciones/notas del documento.
+- Notas4 (varchar(60)): Observaciones/notas del documento.
+- Notas5 (varchar(60)): Observaciones/notas del documento.
+- Notas6 (varchar(60)): Observaciones/notas del documento.
+- Notas7 (varchar(60)): Observaciones/notas del documento.
+- Notas8 (varchar(60)): Observaciones/notas del documento.
+- Notas9 (varchar(60)): Observaciones/notas del documento.
+- Notas10 (varchar(60)): Observaciones/notas del documento.
+- CreatedAt (datetime): Fecha y hora de creaciÃ³n del registro.
+- UpdatedAt (datetime): Fecha y hora de Ãºltima actualizaciÃ³n del registro.
+- NroUnico (ASC): NÃºmero Ãºnico/autoincremental de la transacciÃ³n o documento.
+

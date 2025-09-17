@@ -1,0 +1,31 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SBDESA]    Script Date: 24/08/2025 20:40:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SBDESA](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IOri] [int] NOT NULL,
+	[Descripcion] [varchar](40) NOT NULL,
+	[FechaUU] [datetime] NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SBDESA] ADD  DEFAULT ((0)) FOR [IOri]
+GO
+
+ALTER TABLE [dbo].[SBDESA] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+

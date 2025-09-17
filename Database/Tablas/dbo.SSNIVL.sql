@@ -1,0 +1,30 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SSNIVL]    Script Date: 24/08/2025 20:50:17 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SSNIVL](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodNivl] [int] NOT NULL,
+	[Descrip] [varchar](50) NOT NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SSNIVL] ADD  DEFAULT ((0)) FOR [CodNivl]
+GO
+
+ALTER TABLE [dbo].[SSNIVL] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+

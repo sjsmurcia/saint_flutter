@@ -1,0 +1,84 @@
+﻿# dbo.SAACXC
+
+Tabla: dbo.SAACXC
+Origen: dbo.SAACXC.sql
+
+## Campos
+
+- NroUnico (int): NÃºmero Ãºnico/autoincremental de la transacciÃ³n o documento.
+- CodSucu (varchar(5)): CÃ³digo de sucursal.
+- CodClie (varchar(15)): CÃ³digo de cliente.
+- NroTurno (int): NÃºmero de turno/caja.
+- NroRegi (int): NÃºmero de registro/Ã­tem.
+- FechaI (datetime): Fecha de inicio.
+- FechaE (datetime): Fecha de emisiÃ³n/entrada.
+- FechaV (datetime): Fecha de vencimiento.
+- FechaT (datetime): Fecha de transacciÃ³n.
+- FechaR (datetime): Fecha de registro/recepciÃ³n.
+- CodEsta (varchar(10)): CÃ³digo de establecimiento/estado.
+- CodUsua (varchar(10)): CÃ³digo de usuario.
+- CodOper (varchar(10)): CÃ³digo de operaciÃ³n.
+- CodVend (varchar(10)): CÃ³digo de vendedor.
+- CodTarj (varchar(10)): CÃ³digo de tarjeta.
+- NumeroD (varchar(20)): NÃºmero de documento principal.
+- NumeroF (varchar(20)): NÃºmero fiscal/comprobante.
+- NumeroP (varchar(15)): NÃºmero de pedido o pago.
+- NumeroT (varchar(15)): NÃºmero de ticket/transacciÃ³n.
+- NumeroN (varchar(20)): NÃºmero de documento o referencia
+- NroCtrol (varchar(20)): NÃºmero de control fiscal.
+- FromTran (smallint): Campo FromTran (smallint).
+- TipoCxc (varchar(2)): Campo TipoCxc (varchar(2)).
+- TipoTraE (smallint): Tipo de transacciÃ³n/estado externo.
+- AutSRI (varchar(80)): CÃ³digo/clave de autorizaciÃ³n fiscal (SRI).
+- NroEstable (varchar(10)): NÃºmero de establecimiento.
+- PtoEmision (varchar(10)): Punto de emisiÃ³n fiscal.
+- Moneda (varchar(5)): CÃ³digo o clave de moneda.
+- Factor (decimal(28, 4)): Factor de conversiÃ³n (p. ej., tasa de cambio).
+- MontoMEx (decimal(28, 4)): Monto/valor monetario asociado.
+- SaldoMEx (decimal(28, 4)): Saldo asociado (moneda base), segÃºn contexto.
+- Document (varchar(40)): Referencia al documento asociado.
+- Notas1 (varchar(60)): Observaciones/notas del documento.
+- Notas2 (varchar(60)): Observaciones/notas del documento.
+- Notas3 (varchar(60)): Observaciones/notas del documento.
+- Notas4 (varchar(60)): Observaciones/notas del documento.
+- Notas5 (varchar(60)): Observaciones/notas del documento.
+- Notas6 (varchar(60)): Observaciones/notas del documento.
+- Notas7 (varchar(60)): Observaciones/notas del documento.
+- Notas8 (varchar(60)): Observaciones/notas del documento.
+- Notas9 (varchar(60)): Observaciones/notas del documento.
+- Notas10 (varchar(60)): Observaciones/notas del documento.
+- Monto (decimal(28, 4)): Monto/valor monetario asociado.
+- Debitos (decimal(28, 4)): Total de dÃ©bitos.
+- Creditos (decimal(28, 4)): Total de crÃ©ditos.
+- MontoNeto (decimal(28, 4)): Monto/valor monetario asociado.
+- MtoTax (decimal(28, 4)): Monto/valor monetario asociado.
+- RetenIVA (decimal(28, 4)): Monto retenido de IVA/impuesto.
+- OrgTax (decimal(28, 4)): Campo OrgTax (decimal(28, 4)).
+- Saldo (decimal(28, 4)): Saldo asociado (moneda base), segÃºn contexto.
+- SaldoOrg (decimal(28, 4)): Saldo asociado (moneda base), segÃºn contexto.
+- SaldoAct (decimal(28, 4)): Saldo asociado (moneda base), segÃºn contexto.
+- EsLibroI (smallint): Indicador/flag de configuraciÃ³n (0/1).
+- BaseImpo (decimal(28, 4)): Campo BaseImpo (decimal(28, 4)).
+- TExento (decimal(28, 4)): Base exenta de impuestos.
+- CancelI (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelA (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelE (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelC (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelT (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelG (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelP (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- CancelD (decimal(28, 4)): Montos cancelados/aplicados por forma o estado.
+- Comision (decimal(28, 4)): Campo Comision (decimal(28, 4)).
+- DetalChq (varchar(40)): Campo DetalChq (varchar(40)).
+- EsUnPago (smallint): Indicador/flag de configuraciÃ³n (0/1).
+- AfectaVta (smallint): Campo AfectaVta (smallint).
+- AfectaComi (smallint): Campo AfectaComi (smallint).
+- EsChqDev (smallint): Indicador/flag de configuraciÃ³n (0/1).
+- EsReten (smallint): Indicador de aplica retenciÃ³n (0/1).
+- UltIntMora (datetime): Campo UltIntMora (datetime).
+- PrxVisita (datetime): Campo PrxVisita (datetime).
+- TipoReg (int): Tipo/clase de registro.
+- CreatedAt (datetime): Fecha y hora de creaciÃ³n del registro.
+- UpdatedAt (datetime): Fecha y hora de Ãºltima actualizaciÃ³n del registro.
+- NroUnico (ASC): NÃºmero Ãºnico/autoincremental de la transacciÃ³n o documento.
+

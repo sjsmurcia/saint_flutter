@@ -1,0 +1,94 @@
+﻿# dbo.SACONF
+
+Tabla: dbo.SACONF
+Origen: dbo.SACONF.sql
+
+## Campos
+
+- Id (int): Identificador interno/autonumÃ©rico del registro.
+- CodSucu (varchar(5)): CÃ³digo de sucursal.
+- Descrip (varchar(80)): DescripciÃ³n del registro.
+- Direc1 (varchar(80)): DirecciÃ³n lÃ­nea 1.
+- Direc2 (varchar(80)): DirecciÃ³n lÃ­nea 2.
+- Email (varchar(60)): Correo electrÃ³nico de contacto.
+- Telef (varchar(40)): TelÃ©fono de contacto.
+- RIF (varchar(25)): Campo RIF (varchar(25)).
+- NroSerial (varchar(25)): NÃºmero correlativo asociado.
+- KeySerial (varchar(10)): Campo KeySerial (varchar(10)).
+- FechaUV (date): Fecha de Ãºltima venta.
+- ZipCode (varchar(20)): CÃ³digo postal.
+- Municipio (int): CÃ³digo de municipio (catÃ¡logo).
+- Ciudad (int): CÃ³digo de ciudad (catÃ¡logo).
+- Estado (int): CÃ³digo de estado/provincia (catÃ¡logo).
+- Pais (int): CÃ³digo de paÃ­s (catÃ¡logo).
+- SPais (varchar(30)): Campo SPais (varchar(30)).
+- SEstado (varchar(30)): Campo SEstado (varchar(30)).
+- SCiudad (varchar(30)): Campo SCiudad (varchar(30)).
+- SMunicipio (varchar(30)): Campo SMunicipio (varchar(30)).
+- CodTaxs (varchar(10)): CÃ³digo de impuesto.
+- CostoMes (decimal(28, 4)): Costo del producto (actual/promedio/anterior segÃºn sufijo).
+- CorrelPrd (smallint): Campo CorrelPrd (smallint).
+- IdAppNot (int): Campo IdAppNot (int).
+- IdVersion (int): Campo IdVersion (int).
+- IdVerXtra (int): Campo IdVerXtra (int).
+- Adicional (binary(400)): Campo Adicional (binary(400)).
+- MesCurso (varchar(6)): Campo MesCurso (varchar(6)).
+- Factor (decimal(28, 4)): Factor de conversiÃ³n (p. ej., tasa de cambio).
+- FactorM (decimal(28, 4)): Campo FactorM (decimal(28, 4)).
+- UsaFactorM (smallint): Campo UsaFactorM (smallint).
+- FechaUP (datetime): Fecha asociada al registro.
+- MesTran (int): Campo MesTran (int).
+- MesOC (int): Campo MesOC (int).
+- MesPrf (int): Campo MesPrf (int).
+- MesesPtos (int): Campo MesesPtos (int).
+- ValorPtos (decimal(28, 4)): Campo ValorPtos (decimal(28, 4)).
+- ValorPtosV (decimal(28, 4)): Campo ValorPtosV (decimal(28, 4)).
+- FechaUC (datetime): Fecha de Ãºltima compra.
+- MtoExtraG (decimal(28, 4)): Monto/valor monetario asociado.
+- ImpFleteV (smallint): Campo ImpFleteV (smallint).
+- ImpFleteC (smallint): Campo ImpFleteC (smallint).
+- RetenIVA (smallint): Monto retenido de IVA/impuesto.
+- AutoReten (smallint): Campo AutoReten (smallint).
+- PorctReten (decimal(28, 4)): Campo PorctReten (decimal(28, 4)).
+- PedirNCtrl (smallint): Campo PedirNCtrl (smallint).
+- Redond (smallint): Campo Redond (smallint).
+- RedTotal (smallint): Campo RedTotal (smallint).
+- ObliOper (smallint): Campo ObliOper (smallint).
+- PaswLim (int): Campo PaswLim (int).
+- Settings (nvarchar(max)): Campo Settings (nvarchar(max)).
+- MontoMin (decimal(28, 4)): Monto/valor monetario asociado.
+- SimbFac (varchar(3)): Campo SimbFac (varchar(3)).
+- EsMoneda (smallint): Indicador/flag de configuraciÃ³n (0/1).
+- CorrelUNC (smallint): Campo CorrelUNC (smallint).
+- FillCorrel (smallint): Campo FillCorrel (smallint).
+- Imagen (image): Imagen/archivo binario asociado.
+- TipoFac (smallint): Campo TipoFac (smallint).
+- TipoDef (smallint): Campo TipoDef (smallint).
+- NroEstable (varchar(10)): NÃºmero de establecimiento.
+- RUCUser (varchar(60)): Campo RUCUser (varchar(60)).
+- RUCPwd (varchar(20)): Campo RUCPwd (varchar(20)).
+- SerieFacE (varchar(10)): Campo SerieFacE (varchar(10)).
+- CorrelEstac (smallint): Campo CorrelEstac (smallint).
+- ImpuestoD (decimal(28, 4)): Campo ImpuestoD (decimal(28, 4)).
+- IMailHost (varchar(70)): Campo IMailHost (varchar(70)).
+- IMailPort (int): Campo IMailPort (int).
+- IMailUser (varchar(60)): Campo IMailUser (varchar(60)).
+- IMailPwd (varchar(30)): Campo IMailPwd (varchar(30)).
+- IMailSender (varchar(70)): Campo IMailSender (varchar(70)).
+- IMailSSL (smallint): Campo IMailSSL (smallint).
+- TokenEmpresa (varchar(50)): Campo TokenEmpresa (varchar(50)).
+- TokenSecuencial (varchar(50)): Campo TokenSecuencial (varchar(50)).
+- FacWSrvURL (varchar(100)): Campo FacWSrvURL (varchar(100)).
+- TipoPrv (smallint): Campo TipoPrv (smallint).
+- TipoAtr (smallint): Campo TipoAtr (smallint).
+- CodTaxD1 (varchar(5)): CÃ³digo de t a x d1.
+- CodTaxD2 (varchar(5)): CÃ³digo de t a x d2.
+- MtoTaxD1 (decimal(28, 4)): Monto/valor monetario asociado.
+- MtoTaxD2 (decimal(28, 4)): Monto/valor monetario asociado.
+- DctoAplica (int): Campo DctoAplica (int).
+- ImpT (int): Campo ImpT (int).
+- PrecioI (smallint): Precio de venta (segÃºn lista/escala indicada).
+- CreatedAt (datetime): Fecha y hora de creaciÃ³n del registro.
+- UpdatedAt (datetime): Fecha y hora de Ãºltima actualizaciÃ³n del registro.
+- Id (ASC): Identificador interno/autonumÃ©rico del registro.
+

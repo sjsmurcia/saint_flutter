@@ -1,0 +1,27 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SBDEFPM]    Script Date: 24/08/2025 20:40:31 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SBDEFPM](
+	[NDefAPP] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](70) NOT NULL,
+	[Entidad] [varchar](70) NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NDefAPP] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SBDEFPM] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+

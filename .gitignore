@@ -1,0 +1,31 @@
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS / IDEs
+.vs/
+.vscode/
+.idea/
+
+# .NET (si aplica)
+bin/
+obj/
+*.user
+*.suo
+
+# SQL Server / backups
+*.mdf
+*.ldf
+*.ndf
+*.bak
+*.trn
+*.dacpac
+*.bacpac
+
+# Logs y temporales
+*.log
+*.tmp
+
+# Node (si aplica)
+node_modules/
+dist/

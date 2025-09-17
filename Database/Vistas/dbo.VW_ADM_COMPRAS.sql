@@ -1,0 +1,7 @@
+SELECT TipoCom, NumeroD, NroCtrol, CodSucu, CodEsta, CodUsua, NumeroC, Signo, NumeroP, CodProv, CodUbic, Descrip, Direc1, Direc2, Telef, ID3, DetalChq, FechaT, FechaE, FechaV, OrdenC, CodOper, NGiros, NMeses, 
+                  Signo * Monto AS Monto, Signo * MtoTotal AS MontoTotal, Signo * MtoTax AS MtoTax, Signo * Fletes AS Fletes, Signo * (TGravable + TGravable0) AS TGravable, Signo * TExento AS TExento, Signo * DesctoP AS DesctoP, 
+                  Signo * RetenIVA AS RetenIVA, Signo * CancelI AS CancelI, Signo * CancelA AS CancelA, Signo * CancelE AS CancelE, Signo * CancelC AS CancelC, Signo * CancelT AS CancelT, Signo * CancelG AS CancelG, Signo * Descto1 AS Descto1, 
+                  Signo * Descto2 AS Descto2, Signo * TotalPrd AS TotalPrd, Signo * TotalSrv AS TotalSrv, Signo * MtoFinanc AS MtoFinanc, Signo * (Monto + MtoTax + Fletes) AS Monto_Bruto, Signo * COALESCE ((Monto - (TotalPrd + TotalSrv)) 
+                  / NULLIF (Monto, 0) * 100, 0) AS Monto_PorUtil, Signo * Monto AS Monto_Neto, Signo * (Descto1 + Descto2) AS Monto_Descto, Signo * Contado AS Contado, Signo * Credito AS Credito, Notas1, Notas2, Notas3, Notas4, Notas5, Notas6, 
+                  Notas7, Notas8, Notas9, Notas10
+FROM     dbo.SACOMP WITH (NOLOCK)

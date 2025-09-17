@@ -1,0 +1,212 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SAITEMCOM]    Script Date: 24/08/2025 13:37:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SAITEMCOM](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodSucu] [varchar](5) NOT NULL,
+	[TipoCom] [varchar](1) NOT NULL,
+	[NumeroD] [varchar](20) NOT NULL,
+	[CodProv] [varchar](15) NOT NULL,
+	[OTipo] [varchar](1) NULL,
+	[ONumero] [varchar](20) NULL,
+	[NroLinea] [int] NOT NULL,
+	[NroLineaC] [int] NOT NULL,
+	[CodItem] [varchar](15) NULL,
+	[CodUbic] [varchar](10) NULL,
+	[Descrip1] [varchar](40) NULL,
+	[Descrip2] [varchar](40) NULL,
+	[Descrip3] [varchar](40) NULL,
+	[Descrip4] [varchar](40) NULL,
+	[Descrip5] [varchar](40) NULL,
+	[Descrip6] [varchar](40) NULL,
+	[Descrip7] [varchar](40) NULL,
+	[Descrip8] [varchar](40) NULL,
+	[Descrip9] [varchar](40) NULL,
+	[Descrip10] [varchar](40) NULL,
+	[Refere] [varchar](15) NULL,
+	[Signo] [smallint] NOT NULL,
+	[Tara] [decimal](28, 4) NOT NULL,
+	[CantidadD] [decimal](28, 4) NOT NULL,
+	[Cantidad] [decimal](28, 4) NOT NULL,
+	[CantidadO] [decimal](28, 4) NOT NULL,
+	[CantidadT] [decimal](28, 4) NOT NULL,
+	[ExistAntU] [decimal](28, 4) NOT NULL,
+	[ExistAnt] [decimal](28, 4) NOT NULL,
+	[Faltante] [decimal](28, 4) NOT NULL,
+	[CantidadU] [decimal](28, 4) NOT NULL,
+	[CantidadA] [decimal](28, 4) NOT NULL,
+	[CantidadUA] [decimal](28, 4) NOT NULL,
+	[Costo] [decimal](28, 4) NOT NULL,
+	[MtoTax] [decimal](28, 4) NOT NULL,
+	[CostOrg] [decimal](28, 4) NOT NULL,
+	[CostoI] [decimal](28, 4) NOT NULL,
+	[TotalItem] [decimal](28, 4) NOT NULL,
+	[Precio1] [decimal](28, 4) NOT NULL,
+	[PrecioI1] [decimal](28, 4) NOT NULL,
+	[PrecioIU1] [decimal](28, 4) NOT NULL,
+	[Precio2] [decimal](28, 4) NOT NULL,
+	[PrecioU2] [decimal](28, 4) NOT NULL,
+	[PrecioI2] [decimal](28, 4) NOT NULL,
+	[PrecioIU2] [decimal](28, 4) NOT NULL,
+	[Precio3] [decimal](28, 4) NOT NULL,
+	[PrecioU3] [decimal](28, 4) NOT NULL,
+	[PrecioI3] [decimal](28, 4) NOT NULL,
+	[PrecioIU3] [decimal](28, 4) NOT NULL,
+	[PrecioU] [decimal](28, 4) NOT NULL,
+	[Descto] [decimal](28, 4) NOT NULL,
+	[NroUnicoL] [int] NOT NULL,
+	[NroLote] [varchar](20) NULL,
+	[FechaE] [datetime] NULL,
+	[FechaL] [datetime] NULL,
+	[FechaV] [datetime] NULL,
+	[EsServ] [smallint] NOT NULL,
+	[EsUnid] [smallint] NOT NULL,
+	[EsFreeP] [smallint] NOT NULL,
+	[EsPesa] [smallint] NOT NULL,
+	[EsExento] [smallint] NOT NULL,
+	[UsaServ] [smallint] NOT NULL,
+	[DEsLote] [smallint] NOT NULL,
+	[DEsSeri] [smallint] NOT NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [NroLinea]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [NroLineaC]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Signo]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Tara]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CantidadD]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Cantidad]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CantidadO]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CantidadT]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [ExistAntU]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [ExistAnt]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Faltante]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CantidadU]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CantidadA]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CantidadUA]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Costo]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [MtoTax]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CostOrg]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [CostoI]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [TotalItem]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Precio1]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioI1]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioIU1]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Precio2]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioU2]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioI2]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioIU2]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Precio3]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioU3]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioI3]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioIU3]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [PrecioU]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [Descto]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [NroUnicoL]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [EsServ]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [EsUnid]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [EsFreeP]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [EsPesa]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [EsExento]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [UsaServ]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [DEsLote]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT ((0)) FOR [DEsSeri]
+GO
+
+ALTER TABLE [dbo].[SAITEMCOM] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+
