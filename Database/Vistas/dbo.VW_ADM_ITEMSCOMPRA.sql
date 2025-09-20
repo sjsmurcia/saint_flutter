@@ -1,0 +1,13 @@
+SELECT it.CodSucu, it.TipoCom, it.NumeroD, it.CodProv, it.CodItem, C.Signo, it.Descrip1, it.Descrip2, it.Descrip3, it.Descrip4, it.Descrip5, it.Descrip6, it.Descrip7, it.Descrip8, it.Descrip9, it.Descrip10, it.NroLinea, it.NroUnicoL, it.EsServ, it.EsUnid, 
+                  it.EsExento, it.Cantidad, it.CantidadA, C.Signo * it.Cantidad * it.Costo AS TotCosto, it.CodUbic, it.NroLote, it.Costo, it.FechaL, it.FechaV AS FechaVL, C.FechaE AS FechaEC, C.FechaV AS FechaVC, it.Precio1 AS OPrecio1, 
+                  it.Precio2 AS OPrecio2, it.Precio3 AS OPrecio3, it.Faltante, it.Descto, ip.DocImpo, ip.FechaI, ip.Factor, it.MtoTax, it.CostOrg, ip.Costo1, ip.Costo2, ip.Costo3, ip.Costo4, ip.Costo5, ip.Costo6, ip.Costo7, ip.Costo8, ip.Costo9, ip.Costo10, 
+                  ip.PrecioU AS PrecioIU1, ip.PrecioU2 AS PrecioIU2, ip.PrecioU3 AS PrecioIU3, ip.Precio1 AS PrecioI1, ip.Precio2 AS PrecioI2, ip.Precio3 AS PrecioI3, IIF(SUBSTRING(ISNULL(PR.DESCRIP, SR.DESCRIP), 1, 1) = '?', 1, 0) AS ESFREEP, 
+                  ISNULL(pr.codinst, sr.codinst) AS CodInst, ISNULL(pr.EsImport, 0) AS EsImport, ISNULL(pr.DEsSeri, 0) AS DEsSeri, ISNULL(pr.DEsLote, 0) AS DEsLote, ISNULL(pr.DEsVence, 0) AS DEsVence, ISNULL(pr.EsPesa, 0) AS EsPesa, 
+                  ISNULL(pr.tara, 0) AS Tara, ISNULL(pr.undempaq, '') AS UndEmpaq, ISNULL(pr.Unidad, sr.unidad) AS Unidad, ISNULL(pr.cantempaq, 0) AS CantEmpaq, ISNULL(pr.exdecimal, 0) AS ExDecimal, ISNULL(pr.refere, sr.clase) AS Refere, 
+                  ISNULL(pr.costpro, sr.costo) AS CostPro, ISNULL(pr.costAct, sr.costo) AS CostAct, ISNULL(0, sr.UsaServ) AS UsaServ, ISNULL(pr.precio1, sr.precio1) AS Precio1, ISNULL(pr.precio2, sr.precio2) AS Precio2, ISNULL(pr.precio3, sr.precio3) 
+                  AS Precio3, ISNULL(pr.precioU, 0) AS PrecioU1, ISNULL(pr.Preciou2, 0) AS PrecioU2, ISNULL(pr.Preciou3, 0) AS PrecioU3, ISNULL(pr.Peso, 0) AS Peso, ISNULL(pr.Volumen, 0) AS Volumen, ISNULL(pr.UndVol, '') AS UndVol
+FROM     [dbo].SAITEMCOM AS it WITH (NOLOCK) INNER JOIN
+                  [dbo].VW_ADM_COMPRAS AS C ON C.CodSucu = it.CodSucu AND C.TipoCOM = it.TipoCom AND C.Numerod = it.NumeroD AND C.CodProv = it.CodProv LEFT OUTER JOIN
+                  [dbo].SAPRIMCOM AS ip ON ip.CodSucu = it.CodSucu AND ip.TipoCom = it.TipoCom AND ip.NumeroD = it.NumeroD AND ip.CodProv = it.CodProv AND ip.NroLinea = it.NroLinea LEFT OUTER JOIN
+                  [dbo].SAPROD AS pr ON it.CodItem = pr.CodProd LEFT OUTER JOIN
+                  [dbo].SASERV AS sr ON it.CodItem = sr.CodServ

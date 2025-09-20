@@ -1,0 +1,47 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SBDEFPD]    Script Date: 24/08/2025 20:40:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SBDEFPD](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[NDefAPP] [int] NOT NULL,
+	[TipoCDT] [int] NOT NULL,
+	[NLinea] [int] NOT NULL,
+	[NCampo] [int] NOT NULL,
+	[TipoDat] [int] NOT NULL,
+	[Data] [varchar](100) NULL,
+	[Formato] [varchar](50) NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SBDEFPD] ADD  DEFAULT ((0)) FOR [NDefAPP]
+GO
+
+ALTER TABLE [dbo].[SBDEFPD] ADD  DEFAULT ((0)) FOR [TipoCDT]
+GO
+
+ALTER TABLE [dbo].[SBDEFPD] ADD  DEFAULT ((0)) FOR [NLinea]
+GO
+
+ALTER TABLE [dbo].[SBDEFPD] ADD  DEFAULT ((0)) FOR [NCampo]
+GO
+
+ALTER TABLE [dbo].[SBDEFPD] ADD  DEFAULT ((0)) FOR [TipoDat]
+GO
+
+ALTER TABLE [dbo].[SBDEFPD] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+

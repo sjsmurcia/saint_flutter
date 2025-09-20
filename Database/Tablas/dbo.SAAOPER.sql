@@ -1,0 +1,38 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SAAOPER]    Script Date: 24/08/2025 9:48:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SAAOPER](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CodTbl] [varchar](20) NOT NULL,
+	[NumGrp] [int] NOT NULL,
+	[NroOper] [int] NOT NULL,
+	[PDtaReq] [int] NOT NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SAAOPER] ADD  DEFAULT ((0)) FOR [NumGrp]
+GO
+
+ALTER TABLE [dbo].[SAAOPER] ADD  DEFAULT ((0)) FOR [NroOper]
+GO
+
+ALTER TABLE [dbo].[SAAOPER] ADD  DEFAULT ((0)) FOR [PDtaReq]
+GO
+
+ALTER TABLE [dbo].[SAAOPER] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+

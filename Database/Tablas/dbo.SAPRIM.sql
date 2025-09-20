@@ -1,0 +1,102 @@
+USE [admin]
+GO
+
+/****** Object:  Table [dbo].[SAPRIM]    Script Date: 24/08/2025 20:11:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SAPRIM](
+	[NroUnico] [int] IDENTITY(1,1) NOT NULL,
+	[CodProv] [varchar](15) NULL,
+	[CodProd] [varchar](15) NOT NULL,
+	[NumeroD] [varchar](20) NULL,
+	[Factor] [decimal](28, 4) NOT NULL,
+	[Moneda] [varchar](10) NULL,
+	[FechaE] [datetime] NULL,
+	[CostAct] [decimal](28, 4) NOT NULL,
+	[CostPro] [decimal](28, 4) NOT NULL,
+	[CostAnt] [decimal](28, 4) NOT NULL,
+	[Cantidad] [decimal](28, 4) NOT NULL,
+	[Precio1] [decimal](28, 4) NOT NULL,
+	[Precio2] [decimal](28, 4) NOT NULL,
+	[Precio3] [decimal](28, 4) NOT NULL,
+	[Costo1] [decimal](28, 4) NOT NULL,
+	[Costo2] [decimal](28, 4) NOT NULL,
+	[Costo3] [decimal](28, 4) NOT NULL,
+	[Costo4] [decimal](28, 4) NOT NULL,
+	[Costo5] [decimal](28, 4) NOT NULL,
+	[Costo6] [decimal](28, 4) NOT NULL,
+	[Costo7] [decimal](28, 4) NOT NULL,
+	[Costo8] [decimal](28, 4) NOT NULL,
+	[Costo9] [decimal](28, 4) NOT NULL,
+	[Costo10] [decimal](28, 4) NOT NULL,
+	[CreatedAt] [datetime] NULL,
+	[UpdatedAt] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NroUnico] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Factor]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [CostAct]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [CostPro]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [CostAnt]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Cantidad]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Precio1]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Precio2]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Precio3]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo1]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo2]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo3]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo4]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo5]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo6]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo7]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo8]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo9]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT ((0)) FOR [Costo10]
+GO
+
+ALTER TABLE [dbo].[SAPRIM] ADD  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+
+
