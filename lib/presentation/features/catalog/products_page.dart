@@ -4,6 +4,7 @@ import 'package:saint_flutter/gen_l10n/app_localizations.dart';
 
 import 'package:saint_flutter/di/providers.dart';
 import '../../widgets/app_scaffold.dart';
+import '../../../application/catalog/product_list_controller.dart';
 
 class ProductsPage extends ConsumerStatefulWidget {
   const ProductsPage({super.key});
@@ -19,67 +20,78 @@ class _ProductsPageState extends ConsumerState<ProductsPage> {
     Future.microtask(() => ref.read(productSyncTriggerProvider.future));
   }
 
-  Future<void> _sync() async {
+  Future<void> _sync(ProductListController controller) async {
     ref.invalidate(productSyncTriggerProvider);
     await ref.read(productSyncTriggerProvider.future);
+    await controller.refresh();
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final productsAsync = ref.watch(productsStreamProvider);
+    final state = ref.watch(productListControllerProvider);
+    final controller = ref.read(productListControllerProvider.notifier);
 
-    return AppScaffold(
-      title: l10n?.productsTitle ?? 'Productos',
-      child: RefreshIndicator(
-        onRefresh: _sync,
-        child: productsAsync.when(
-          data: (products) {
-            if (products.isEmpty) {
-              return ListView(
-                padding: const EdgeInsets.all(24),
-                children: [
-                  Center(
-                    child: Text(
-                      l10n?.productsEmpty ?? 'Sin productos sincronizados',
-                    ),
-                  ),
-                ],
-              );
-            }
-            return ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemCount: products.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.inventory_2_outlined),
-                    title: Text(product.name),
-                    subtitle: Text('${product.sku} | ${product.companyId}'),
-                    trailing: Text(product.price.toStringAsFixed(2)),
-                  ),
-                );
-              },
-            );
-          },
-          loading: () => ListView(
-            padding: const EdgeInsets.all(24),
-            children: const [Center(child: CircularProgressIndicator())],
-          ),
-          error: (error, stackTrace) => ListView(
-            padding: const EdgeInsets.all(24),
+    Widget buildBody() {
+      if (state.isLoading && state.items.isEmpty) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if (state.errorMessage != null && state.items.isEmpty) {
+        return Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(l10n?.genericError ?? 'Ocurrio un error'),
+              Text(state.errorMessage ?? ''),
               const SizedBox(height: 16),
               FilledButton(
-                onPressed: _sync,
+                onPressed: controller.loadInitial,
                 child: Text(l10n?.retry ?? 'Reintentar'),
               ),
             ],
           ),
-        ),
+        );
+      }
+      if (state.items.isEmpty) {
+        return Center(
+          child: Text(
+            l10n?.productsEmpty ?? 'Sin productos sincronizados',
+          ),
+        );
+      }
+
+      final itemCount = state.items.length + (state.hasMore ? 1 : 0);
+      return ListView.separated(
+        padding: const EdgeInsets.all(16),
+        itemCount: itemCount,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (context, index) {
+          if (index >= state.items.length) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              controller.loadMore();
+            });
+            return const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+          final product = state.items[index];
+          return Card(
+            child: ListTile(
+              leading: const Icon(Icons.inventory_2_outlined),
+              title: Text(product.name),
+              subtitle: Text('${product.sku} | ${product.companyId}'),
+              trailing: Text(product.price.toStringAsFixed(2)),
+            ),
+          );
+        },
+      );
+    }
+
+    return AppScaffold(
+      title: l10n?.productsTitle ?? 'Productos',
+      child: RefreshIndicator(
+        onRefresh: () => _sync(controller),
+        child: buildBody(),
       ),
     );
   }

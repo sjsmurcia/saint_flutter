@@ -4,8 +4,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../application/auth/auth_controller.dart';
 import '../application/auth/auth_state.dart';
+import '../application/catalog/client_list_controller.dart';
+import '../application/catalog/product_list_controller.dart';
+import '../application/common/paged_state.dart';
 import '../application/company/company_selection_controller.dart';
 import '../application/company/company_selection_state.dart';
+import '../application/license/license_controller.dart';
+import '../application/license/license_state.dart';
 import '../application/reports/report_service.dart';
 import '../application/reports/reports_controller.dart';
 import '../domain/models/bank_account.dart';
@@ -20,6 +25,7 @@ import '../domain/repositories/auth_repository.dart';
 import '../domain/repositories/bank_repository.dart';
 import '../domain/repositories/company_repository.dart';
 import '../domain/repositories/client_repository.dart';
+import '../domain/repositories/license_repository.dart';
 import '../domain/repositories/outbox_repository.dart';
 import '../domain/repositories/product_repository.dart';
 import '../domain/repositories/purchase_repository.dart';
@@ -33,17 +39,22 @@ import '../infrastructure/local/dao/product_dao.dart';
 import '../infrastructure/local/dao/purchase_dao.dart';
 import '../infrastructure/local/dao/sales_dao.dart';
 import '../infrastructure/local/database/app_database.dart';
-import '../infrastructure/remote/mock_auth_api.dart';
+import '../infrastructure/remote/auth_api.dart';
 import '../infrastructure/remote/mock_catalog_api.dart';
+import '../infrastructure/remote/license_api.dart';
 import '../infrastructure/repositories/auth_repository_impl.dart';
 import '../infrastructure/repositories/bank_repository_impl.dart';
 import '../infrastructure/repositories/client_repository_impl.dart';
 import '../infrastructure/repositories/company_repository_impl.dart';
+import '../infrastructure/repositories/license_repository_impl.dart';
 import '../infrastructure/repositories/outbox_repository_impl.dart';
 import '../infrastructure/repositories/product_repository_impl.dart';
 import '../infrastructure/repositories/purchase_repository_impl.dart';
 import '../infrastructure/repositories/report_repository_impl.dart';
 import '../infrastructure/repositories/sales_repository_impl.dart';
+import '../infrastructure/storage/license_storage.dart';
+import '../utils/license_public_key.dart';
+import '../utils/license_token_decoder.dart';
 
 const _defaultReportingBaseUrl = String.fromEnvironment(
   'REPORTING_BASE_URL',
@@ -54,7 +65,10 @@ final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
   return const FlutterSecureStorage();
 });
 
-final mockAuthApiProvider = Provider<MockAuthApi>((ref) => MockAuthApi());
+final authApiProvider = Provider<AuthApi>((ref) {
+  final dio = ref.watch(reportingDioProvider);
+  return AuthApi(dio);
+});
 final mockCatalogApiProvider = Provider<MockCatalogApi>(
   (ref) => MockCatalogApi(),
 );
@@ -116,7 +130,7 @@ final outboxDaoProvider = Provider<OutboxDao>((ref) {
 });
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  final api = ref.watch(mockAuthApiProvider);
+  final api = ref.watch(authApiProvider);
   final storage = ref.watch(secureStorageProvider);
   return AuthRepositoryImpl(api, storage);
 });
@@ -172,6 +186,69 @@ final reportServiceProvider = Provider<ReportService>((ref) {
   return ReportService(ref);
 });
 
+final productListControllerProvider = StateNotifierProvider<ProductListController, PagedState<Product>>((ref) {
+  final controller = ProductListController(ref);
+  ref.listen<AuthState>(authControllerProvider, (previous, next) {
+    final previousTenant = previous?.maybeWhen(
+      authenticated: (session) => session.tenantId,
+      orElse: () => null,
+    );
+    final currentTenant = next.maybeWhen(
+      authenticated: (session) => session.tenantId,
+      orElse: () => null,
+    );
+    if (previousTenant != currentTenant) {
+      controller.loadInitial();
+    }
+  });
+  return controller;
+});
+
+final clientListControllerProvider = StateNotifierProvider<ClientListController, PagedState<Client>>((ref) {
+  final controller = ClientListController(ref);
+  ref.listen<AuthState>(authControllerProvider, (previous, next) {
+    final previousTenant = previous?.maybeWhen(
+      authenticated: (session) => session.tenantId,
+      orElse: () => null,
+    );
+    final currentTenant = next.maybeWhen(
+      authenticated: (session) => session.tenantId,
+      orElse: () => null,
+    );
+    if (previousTenant != currentTenant) {
+      controller.loadInitial();
+    }
+  });
+  return controller;
+});
+
+final licenseApiProvider = Provider<LicenseApi>((ref) {
+  final dio = ref.watch(reportingDioProvider);
+  return LicenseApi(dio);
+});
+
+final licenseTokenDecoderProvider = Provider<LicenseTokenDecoder>((ref) {
+  return LicenseTokenDecoder(licensePublicKeyPem);
+});
+
+final licenseStorageProvider = Provider<LicenseStorage>((ref) {
+  final storage = ref.watch(secureStorageProvider);
+  return LicenseStorage(storage);
+});
+
+final licenseRepositoryProvider = Provider<LicenseRepository>((ref) {
+  final api = ref.watch(licenseApiProvider);
+  final storage = ref.watch(licenseStorageProvider);
+  final decoder = ref.watch(licenseTokenDecoderProvider);
+  return LicenseRepositoryImpl(api, storage, decoder);
+});
+
+final licenseControllerProvider =
+    StateNotifierProvider<LicenseController, LicenseState>((ref) {
+      final repository = ref.watch(licenseRepositoryProvider);
+      return LicenseController(repository);
+    });
+
 final authControllerProvider = StateNotifierProvider<AuthController, AuthState>(
   (ref) {
     final repository = ref.watch(authRepositoryProvider);
@@ -212,16 +289,6 @@ final reportsControllerProvider =
     ) {
       return ReportsController(ref);
     });
-
-final productsStreamProvider = StreamProvider.autoDispose<List<Product>>((ref) {
-  final repository = ref.watch(productRepositoryProvider);
-  return repository.watchAll();
-});
-
-final clientsStreamProvider = StreamProvider.autoDispose<List<Client>>((ref) {
-  final repository = ref.watch(clientRepositoryProvider);
-  return repository.watchAll();
-});
 
 final salesStreamProvider = StreamProvider.autoDispose<List<SaleDocument>>((
   ref,
@@ -289,3 +356,4 @@ final clientSyncTriggerProvider = FutureProvider.autoDispose<void>((ref) async {
   }
   await repository.sync(session.tenantId);
 });
+

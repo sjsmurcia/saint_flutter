@@ -31,6 +31,31 @@ class ClientRepositoryImpl implements ClientRepository {
   }
 
   @override
+  Future<List<Client>> fetchPage({
+    required String tenantId,
+    required int limit,
+    required int offset,
+  }) async {
+    final rows = await _dao.fetchPage(
+      tenantId: tenantId,
+      limit: limit,
+      offset: offset,
+    );
+    return rows
+        .map(
+          (row) => Client(
+            id: row.id,
+            tenantId: row.tenantId,
+            name: row.name,
+            email: row.email,
+            phone: row.phone,
+            updatedAt: row.updatedAt,
+          ),
+        )
+        .toList();
+  }
+
+  @override
   Future<void> sync(String tenantId) async {
     final payload = await _api.fetchClients(tenantId: tenantId);
     final models = payload

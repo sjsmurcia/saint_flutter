@@ -16,13 +16,14 @@ class ReportService {
   Directory? _cachedReportsDir;
 
   Future<ReportDocument> downloadInvoice({required String documentId}) async {
-    final session = _requireSession();
+    final contextData = _requireContext();
     final locale = Intl.getCurrentLocale();
     final repository = _ref.read(reportRepositoryProvider);
 
     final report = await repository.generateInvoice(
-      tenantId: session.tenantId,
-      token: session.token,
+      tenantId: contextData.tenantId,
+      token: contextData.authToken,
+      licenseToken: contextData.licenseToken,
       documentId: documentId,
       locale: locale,
     );
@@ -34,13 +35,14 @@ class ReportService {
     required DateTime from,
     required DateTime to,
   }) async {
-    final session = _requireSession();
+    final contextData = _requireContext();
     final locale = Intl.getCurrentLocale();
     final repository = _ref.read(reportRepositoryProvider);
 
     final report = await repository.generateSalesPeriod(
-      tenantId: session.tenantId,
-      token: session.token,
+      tenantId: contextData.tenantId,
+      token: contextData.authToken,
+      licenseToken: contextData.licenseToken,
       from: from,
       to: to,
       locale: locale,
@@ -147,22 +149,41 @@ class ReportService {
     return 'report';
   }
 
-  _SessionSnapshot _requireSession() {
-    final state = _ref.read(authControllerProvider);
-    final session = state.maybeWhen(
+  _ReportContext _requireContext() {
+    final authState = _ref.read(authControllerProvider);
+    final session = authState.maybeWhen(
       authenticated: (session) => session,
       orElse: () => null,
     );
     if (session == null) {
       throw StateError('No hay sesion activa');
     }
-    return _SessionSnapshot(session.token, session.tenantId);
+
+    final licenseState = _ref.read(licenseControllerProvider);
+    final licenseToken = licenseState.maybeWhen(
+      active: (info, _) => info.token,
+      orElse: () => null,
+    );
+    if (licenseToken == null) {
+      throw StateError('La licencia no esta activa');
+    }
+
+    return _ReportContext(
+      authToken: session.token,
+      licenseToken: licenseToken,
+      tenantId: session.tenantId,
+    );
   }
 }
 
-class _SessionSnapshot {
-  _SessionSnapshot(this.token, this.tenantId);
+class _ReportContext {
+  _ReportContext({
+    required this.authToken,
+    required this.licenseToken,
+    required this.tenantId,
+  });
 
-  final String token;
+  final String authToken;
+  final String licenseToken;
   final String tenantId;
 }

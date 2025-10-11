@@ -7,6 +7,9 @@ import 'package:path_provider/path_provider.dart';
 
 part 'app_database.g.dart';
 
+@TableIndex(name: 'products_tenant_name_idx', columns: {#tenantId, #name})
+@TableIndex(name: 'products_tenant_updated_idx', columns: {#tenantId, #updatedAt})
+@TableIndex(name: 'products_tenant_sku_idx', columns: {#tenantId, #sku})
 @DataClassName('ProductEntity')
 class Products extends Table {
   TextColumn get id => text()();
@@ -21,6 +24,8 @@ class Products extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@TableIndex(name: 'clients_tenant_name_idx', columns: {#tenantId, #name})
+@TableIndex(name: 'clients_tenant_updated_idx', columns: {#tenantId, #updatedAt})
 @DataClassName('ClientEntity')
 class Clients extends Table {
   TextColumn get id => text()();
@@ -33,6 +38,8 @@ class Clients extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@TableIndex(name: 'sales_tenant_status_idx', columns: {#tenantId, #status})
+@TableIndex(name: 'sales_tenant_created_idx', columns: {#tenantId, #createdAt})
 @DataClassName('SalesDocumentEntity')
 class SalesDocuments extends Table {
   TextColumn get id => text()();
@@ -47,6 +54,8 @@ class SalesDocuments extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@TableIndex(name: 'purchases_tenant_status_idx', columns: {#tenantId, #status})
+@TableIndex(name: 'purchases_tenant_created_idx', columns: {#tenantId, #createdAt})
 @DataClassName('PurchaseDocumentEntity')
 class PurchaseDocuments extends Table {
   TextColumn get id => text()();
@@ -61,6 +70,7 @@ class PurchaseDocuments extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@TableIndex(name: 'bank_accounts_tenant_name_idx', columns: {#tenantId, #name})
 @DataClassName('BankAccountEntity')
 class BankAccounts extends Table {
   TextColumn get id => text()();
@@ -73,6 +83,9 @@ class BankAccounts extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@TableIndex(name: 'bank_movements_account_occurred_idx', columns: {#accountId, #occurredAt})
+@TableIndex(name: 'bank_movements_tenant_occurred_idx', columns: {#tenantId, #occurredAt})
+@TableIndex(name: 'bank_movements_tenant_status_idx', columns: {#tenantId, #status})
 @DataClassName('BankMovementEntity')
 class BankMovements extends Table {
   TextColumn get id => text()();
@@ -97,6 +110,8 @@ class SyncStates extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@TableIndex(name: 'outbox_status_idx', columns: {#status})
+@TableIndex(name: 'outbox_tenant_created_idx', columns: {#tenantId, #createdAt})
 @DataClassName('OutboxEntryEntity')
 class OutboxEntries extends Table {
   TextColumn get id => text()();
@@ -126,23 +141,75 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onUpgrade: (migrator, from, to) async {
-      if (from == 1) {
+      if (from < 2) {
         await migrator.createTable(salesDocuments);
         await migrator.createTable(purchaseDocuments);
         await migrator.addColumn(outboxEntries, outboxEntries.processedAt);
         from = 2;
       }
-      if (from == 2) {
+      if (from < 3) {
         await migrator.createTable(bankAccounts);
         await migrator.createTable(bankMovements);
+        from = 3;
+      }
+      if (from < 4) {
+        await _createPerformanceIndexes();
       }
     },
   );
+
+  Future<void> _createPerformanceIndexes() async {
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS products_tenant_name_idx ON products (tenant_id, name)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS products_tenant_updated_idx ON products (tenant_id, updated_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS products_tenant_sku_idx ON products (tenant_id, sku)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS clients_tenant_name_idx ON clients (tenant_id, name)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS clients_tenant_updated_idx ON clients (tenant_id, updated_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS sales_tenant_status_idx ON sales_documents (tenant_id, status)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS sales_tenant_created_idx ON sales_documents (tenant_id, created_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS purchases_tenant_status_idx ON purchase_documents (tenant_id, status)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS purchases_tenant_created_idx ON purchase_documents (tenant_id, created_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS bank_accounts_tenant_name_idx ON bank_accounts (tenant_id, name)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS bank_movements_account_occurred_idx ON bank_movements (account_id, occurred_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS bank_movements_tenant_occurred_idx ON bank_movements (tenant_id, occurred_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS bank_movements_tenant_status_idx ON bank_movements (tenant_id, status)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS outbox_status_idx ON outbox_entries (status)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS outbox_tenant_created_idx ON outbox_entries (tenant_id, created_at)',
+    );
+  }
 }
 
 LazyDatabase _openConnection() {

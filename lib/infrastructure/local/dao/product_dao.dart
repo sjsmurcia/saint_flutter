@@ -23,4 +23,16 @@ class ProductDao {
       }
     });
   }
+
+  Future<List<ProductEntity>> fetchPage({
+    required String tenantId,
+    required int limit,
+    required int offset,
+  }) {
+    final query = _db.select(_db.products)
+      ..where((tbl) => tbl.tenantId.equals(tenantId))
+      ..orderBy([(t) => OrderingTerm(expression: t.name)]);
+    query.limit(limit, offset: offset);
+    return query.get();
+  }
 }

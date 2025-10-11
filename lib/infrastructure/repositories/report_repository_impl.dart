@@ -13,6 +13,7 @@ class ReportRepositoryImpl implements ReportRepository {
   Future<ReportFile> generateInvoice({
     required String tenantId,
     required String token,
+    required String licenseToken,
     required String documentId,
     String format = 'pdf',
     String? locale,
@@ -20,6 +21,7 @@ class ReportRepositoryImpl implements ReportRepository {
     return _postReport(
       path: '/reports/invoice',
       token: token,
+      licenseToken: licenseToken,
       payload: {
         'tenantId': tenantId,
         'documentId': documentId,
@@ -34,6 +36,7 @@ class ReportRepositoryImpl implements ReportRepository {
   Future<ReportFile> generateSalesPeriod({
     required String tenantId,
     required String token,
+    required String licenseToken,
     required DateTime from,
     required DateTime to,
     String format = 'pdf',
@@ -42,6 +45,7 @@ class ReportRepositoryImpl implements ReportRepository {
     return _postReport(
       path: '/reports/sales-period',
       token: token,
+      licenseToken: licenseToken,
       payload: {
         'tenantId': tenantId,
         'from': from.toIso8601String(),
@@ -57,6 +61,7 @@ class ReportRepositoryImpl implements ReportRepository {
   Future<ReportFile> _postReport({
     required String path,
     required String token,
+    required String licenseToken,
     required Map<String, dynamic> payload,
     required String fallbackName,
   }) async {
@@ -68,6 +73,7 @@ class ReportRepositoryImpl implements ReportRepository {
           responseType: ResponseType.bytes,
           headers: {
             'Authorization': 'Bearer $token',
+            'X-License-Token': licenseToken,
             'Content-Type': 'application/json',
             'Accept': 'application/pdf',
           },

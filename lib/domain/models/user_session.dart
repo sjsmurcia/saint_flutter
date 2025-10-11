@@ -10,6 +10,8 @@ class UserSession with _$UserSession {
     required DateTime expiresAt,
     required String tenantId,
     required String userName,
+    required String role,
+    @Default(<String>[]) List<String> permissions,
   }) = _UserSession;
 
   factory UserSession.fromJson(Map<String, dynamic> json) =>

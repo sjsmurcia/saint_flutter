@@ -25,6 +25,8 @@ mixin _$UserSession {
   DateTime get expiresAt => throw _privateConstructorUsedError;
   String get tenantId => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
+  List<String> get permissions => throw _privateConstructorUsedError;
 
   /// Serializes this UserSession to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,6 +50,8 @@ abstract class $UserSessionCopyWith<$Res> {
     DateTime expiresAt,
     String tenantId,
     String userName,
+    String role,
+    List<String> permissions,
   });
 }
 
@@ -70,6 +74,8 @@ class _$UserSessionCopyWithImpl<$Res, $Val extends UserSession>
     Object? expiresAt = null,
     Object? tenantId = null,
     Object? userName = null,
+    Object? role = null,
+    Object? permissions = null,
   }) {
     return _then(
       _value.copyWith(
@@ -89,6 +95,14 @@ class _$UserSessionCopyWithImpl<$Res, $Val extends UserSession>
                 ? _value.userName
                 : userName // ignore: cast_nullable_to_non_nullable
                       as String,
+            role: null == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
+                      as String,
+            permissions: null == permissions
+                ? _value.permissions
+                : permissions // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
           )
           as $Val,
     );
@@ -109,6 +123,8 @@ abstract class _$$UserSessionImplCopyWith<$Res>
     DateTime expiresAt,
     String tenantId,
     String userName,
+    String role,
+    List<String> permissions,
   });
 }
 
@@ -130,6 +146,8 @@ class __$$UserSessionImplCopyWithImpl<$Res>
     Object? expiresAt = null,
     Object? tenantId = null,
     Object? userName = null,
+    Object? role = null,
+    Object? permissions = null,
   }) {
     return _then(
       _$UserSessionImpl(
@@ -149,6 +167,14 @@ class __$$UserSessionImplCopyWithImpl<$Res>
             ? _value.userName
             : userName // ignore: cast_nullable_to_non_nullable
                   as String,
+        role: null == role
+            ? _value.role
+            : role // ignore: cast_nullable_to_non_nullable
+                  as String,
+        permissions: null == permissions
+            ? _value._permissions
+            : permissions // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
       ),
     );
   }
@@ -162,7 +188,9 @@ class _$UserSessionImpl implements _UserSession {
     required this.expiresAt,
     required this.tenantId,
     required this.userName,
-  });
+    required this.role,
+    final List<String> permissions = const <String>[],
+  }) : _permissions = permissions;
 
   factory _$UserSessionImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserSessionImplFromJson(json);
@@ -175,10 +203,20 @@ class _$UserSessionImpl implements _UserSession {
   final String tenantId;
   @override
   final String userName;
+  @override
+  final String role;
+  final List<String> _permissions;
+  @override
+  @JsonKey()
+  List<String> get permissions {
+    if (_permissions is EqualUnmodifiableListView) return _permissions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_permissions);
+  }
 
   @override
   String toString() {
-    return 'UserSession(token: $token, expiresAt: $expiresAt, tenantId: $tenantId, userName: $userName)';
+    return 'UserSession(token: $token, expiresAt: $expiresAt, tenantId: $tenantId, userName: $userName, role: $role, permissions: $permissions)';
   }
 
   @override
@@ -192,13 +230,25 @@ class _$UserSessionImpl implements _UserSession {
             (identical(other.tenantId, tenantId) ||
                 other.tenantId == tenantId) &&
             (identical(other.userName, userName) ||
-                other.userName == userName));
+                other.userName == userName) &&
+            (identical(other.role, role) || other.role == role) &&
+            const DeepCollectionEquality().equals(
+              other._permissions,
+              _permissions,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, token, expiresAt, tenantId, userName);
+  int get hashCode => Object.hash(
+    runtimeType,
+    token,
+    expiresAt,
+    tenantId,
+    userName,
+    role,
+    const DeepCollectionEquality().hash(_permissions),
+  );
 
   /// Create a copy of UserSession
   /// with the given fields replaced by the non-null parameter values.
@@ -220,6 +270,8 @@ abstract class _UserSession implements UserSession {
     required final DateTime expiresAt,
     required final String tenantId,
     required final String userName,
+    required final String role,
+    final List<String> permissions,
   }) = _$UserSessionImpl;
 
   factory _UserSession.fromJson(Map<String, dynamic> json) =
@@ -233,6 +285,10 @@ abstract class _UserSession implements UserSession {
   String get tenantId;
   @override
   String get userName;
+  @override
+  String get role;
+  @override
+  List<String> get permissions;
 
   /// Create a copy of UserSession
   /// with the given fields replaced by the non-null parameter values.

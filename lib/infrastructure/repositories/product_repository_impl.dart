@@ -33,6 +33,33 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
+  Future<List<Product>> fetchPage({
+    required String tenantId,
+    required int limit,
+    required int offset,
+  }) async {
+    final rows = await _dao.fetchPage(
+      tenantId: tenantId,
+      limit: limit,
+      offset: offset,
+    );
+    return rows
+        .map(
+          (row) => Product(
+            id: row.id,
+            tenantId: row.tenantId,
+            companyId: row.companyId,
+            branchId: row.branchId,
+            name: row.name,
+            sku: row.sku,
+            price: row.price,
+            updatedAt: row.updatedAt,
+          ),
+        )
+        .toList();
+  }
+
+  @override
   Future<void> sync(String tenantId) async {
     final payload = await _api.fetchProducts(tenantId: tenantId);
     final models = payload

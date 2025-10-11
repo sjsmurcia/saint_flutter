@@ -4,12 +4,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../domain/models/user_session.dart';
 import '../../domain/repositories/auth_repository.dart';
-import '../remote/mock_auth_api.dart';
+import '../remote/auth_api.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._api, this._storage);
 
-  final MockAuthApi _api;
+  final AuthApi _api;
   final FlutterSecureStorage _storage;
 
   static const _sessionKey = 'auth_session';

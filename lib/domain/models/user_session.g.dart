@@ -12,6 +12,12 @@ _$UserSessionImpl _$$UserSessionImplFromJson(Map<String, dynamic> json) =>
       expiresAt: DateTime.parse(json['expiresAt'] as String),
       tenantId: json['tenantId'] as String,
       userName: json['userName'] as String,
+      role: json['role'] as String,
+      permissions:
+          (json['permissions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const <String>[],
     );
 
 Map<String, dynamic> _$$UserSessionImplToJson(_$UserSessionImpl instance) =>
@@ -20,4 +26,6 @@ Map<String, dynamic> _$$UserSessionImplToJson(_$UserSessionImpl instance) =>
       'expiresAt': instance.expiresAt.toIso8601String(),
       'tenantId': instance.tenantId,
       'userName': instance.userName,
+      'role': instance.role,
+      'permissions': instance.permissions,
     };

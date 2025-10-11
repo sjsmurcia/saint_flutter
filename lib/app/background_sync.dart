@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workmanager/workmanager.dart';
 
 import '../application/sync/sync_coordinator.dart';
+import '../di/providers.dart';
 
 const backgroundSyncTask = 'saint_background_sync';
 
@@ -11,6 +12,9 @@ void callbackDispatcher() {
     WidgetsFlutterBinding.ensureInitialized();
     final container = ProviderContainer();
     try {
+      await container
+          .read(licenseControllerProvider.notifier)
+          .checkIn();
       await container.read(syncCoordinatorProvider).syncNow();
       return true;
     } catch (_) {
