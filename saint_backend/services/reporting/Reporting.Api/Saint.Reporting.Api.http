@@ -1,0 +1,6 @@
+@Saint.Reporting.Api_HostAddress = http://localhost:5189
+
+GET {{Saint.Reporting.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

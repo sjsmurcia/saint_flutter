@@ -4,6 +4,21 @@ Esta guía detalla, paso a paso, cómo levantar el backend desde cero para acomp
 
 ---
 
+## Ubicación dentro del repositorio
+
+Trabajaremos con un solo repositorio. Desde la raíz se recomienda la siguiente estructura:
+
+```
+repo-root/
+ ├── saint_flutter/     # proyecto Flutter existente
+ ├── saint_backend/     # solución .NET (se creará con los pasos siguientes)
+ └── docs/              # documentación compartida (este archivo vive aquí)
+```
+
+Todos los comandos indicados más adelante parten de `repo-root/` (el mismo nivel donde están `saint_flutter/` y `docs/`).
+
+---
+
 ## 1. Snapshot de arquitectura
 
 | Servicio | Responsabilidad | Estado actual |

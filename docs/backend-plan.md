@@ -20,8 +20,8 @@
 - Estructura recomendada: `services/auth`, `services/catalog`, `services/transactions`, `services/reporting`, `services/sync`. Usar solution única (`saint_backend.sln`) con proyectos por servicio + librería `SharedContracts`.
 
 ## 3. Modelo de datos (base SQLite/Drift ya implementada)
-| Tabla | Campos clave | Notas |
-| --- | --- | --- |
+| Tabla | Campos clave | Notas | 
+| ---   | ---          | ---   |
 | `products` | tenant_id, company_id, branch_id, sku, price, updated_at | Multi tenant, requiere índices por tenant + updated_at. |
 | `clients` | tenant_id, name, email, phone, updated_at | Igual a products. |
 | `sales_documents` | tenant_id, company_id, branch_id, total, status, created_at | Status: draft/sent. |
