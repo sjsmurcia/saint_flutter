@@ -1,4 +1,4 @@
-USE [admin]
+USE [SAINTA]
 GO
 
 /****** Object:  Table [dbo].[SARGORET]    Script Date: 24/08/2025 20:26:48 ******/

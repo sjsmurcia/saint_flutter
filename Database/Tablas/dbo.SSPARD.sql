@@ -1,4 +1,4 @@
-USE [admin]
+USE [SAINTA]
 GO
 
 /****** Object:  Table [dbo].[SSPARD]    Script Date: 24/08/2025 20:50:55 ******/

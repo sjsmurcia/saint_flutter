@@ -1,4 +1,4 @@
-USE [admin]
+USE [SAINTA]
 GO
 
 /****** Object:  Table [dbo].[SALOTE]    Script Date: 24/08/2025 13:40:54 ******/

@@ -59,6 +59,7 @@
    - GET `/catalog/products?tenantId=&updatedAfter=&page=&pageSize=`
    - GET `/catalog/clients?...`
    - GET `/catalog/companies?tenantId=...` (multi sucursal).
+   - Estado actual: endpoints de clientes (GET/POST) expuestos en `Catalog.Api`; falta completar productos y companias.
 4. **Sync API**:
    - POST `/sync/outbox` recibe lote (sales/purchases/banks) → valida y actualiza estatus.
    - GET `/sync/pull?entity=sales&since=` devuelve cambios incremental.

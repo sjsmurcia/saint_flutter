@@ -1,4 +1,4 @@
-USE [admin]
+USE [SAINTA]
 GO
 
 /****** Object:  Table [dbo].[SACLICNV]    Script Date: 24/08/2025 9:50:57 ******/

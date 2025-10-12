@@ -26,7 +26,7 @@ Esta guía define **cómo arrancar el proyecto** (app Flutter Android tablet-fir
 * **.NET 8 SDK** (para microservicio de reportes) + **DevExpress Reporting** (XtraReports) instalado/licenciado en entorno de backend.
 * **Git** + **Git LFS** (si planeas guardar PDFs de ejemplo).
 * **Java JDK 17** (compat Android Gradle Plugin).
-* **Node 18+** (opcional: scripts utilitarios, mock server o tools).
+* **Node 18+** (opcional: scripts utilitarios, mock server o tools).doc
 
 ### 0.2. Instalaciones (resumen comandos)
 

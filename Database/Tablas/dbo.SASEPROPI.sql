@@ -1,4 +1,4 @@
-USE [admin]
+USE [SAINTA]
 GO
 
 /****** Object:  Table [dbo].[SASEPROPI]    Script Date: 24/08/2025 20:28:37 ******/

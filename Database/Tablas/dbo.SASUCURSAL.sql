@@ -1,4 +1,4 @@
-USE [admin]
+USE [SAINTA]
 GO
 
 /****** Object:  Table [dbo].[SASUCURSAL]    Script Date: 24/08/2025 20:30:15 ******/

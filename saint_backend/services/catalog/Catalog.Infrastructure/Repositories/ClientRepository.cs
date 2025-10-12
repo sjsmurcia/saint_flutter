@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Saint.Catalog.Application.Interfaces;
 using Saint.Catalog.Infrastructure.Entities;
@@ -23,22 +25,27 @@ public class ClientRepository : IClientRepository
 
         var skip = (page - 1) * pageSize;
 
-        return await query
+        var paged = query
             .OrderBy(c => c.Code)
             .Skip(skip)
-            .Take(pageSize)
-            .Select(c => new ClientDto
-            {
-                Id = c.Code,
-                Type = c.Type == 1 ? "supplier" : "customer",
-                Name = c.Name ?? string.Empty,
-                Email = c.Email,
-                Phone = c.Phone,
-                Address = string.Join(" ", new[] { c.Address1, c.Address2 }.Where(s => !string.IsNullOrWhiteSpace(s))),
-                TaxId = c.TaxId,
-                UpdatedAt = c.UpdatedAt ?? DateTime.UtcNow
-            })
-            .ToListAsync();
+            .Take(pageSize);
+
+        var sql = paged.ToQueryString();
+        Console.WriteLine(sql);
+
+        var entities = await paged.ToListAsync();
+
+        return entities.Select(c => new ClientDto
+        {
+            Id = c.Code,
+            Type = c.Type == 1 ? "supplier" : "customer",
+            Name = c.Name ?? string.Empty,
+            Email = c.Email,
+            Phone = c.Phone,
+            Address = string.Join(" ", new[] { c.Address1, c.Address2 }.Where(s => !string.IsNullOrWhiteSpace(s))),
+            TaxId = c.TaxId,
+            UpdatedAt = c.UpdatedAt ?? DateTime.UtcNow
+        }).ToList();
     }
 
     public async Task<ClientDto?> GetByCodeAsync(string code) =>
