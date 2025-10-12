@@ -48,22 +48,24 @@ public class ClientRepository : IClientRepository
         }).ToList();
     }
 
-    public async Task<ClientDto?> GetByCodeAsync(string code) =>
-        await _db.Clients.AsNoTracking()
-            .Where(c => c.Code == code)
-            .Select(c => new ClientDto
-            {
-                Id = c.Code,
-                Type = c.Type == 1 ? "supplier" : "customer",
-                Name = c.Name ?? string.Empty,
-                Email = c.Email,
-                Phone = c.Phone,
-                Address = string.Join(" ", new[] { c.Address1, c.Address2 }.Where(s => !string.IsNullOrWhiteSpace(s))),
-                TaxId = c.TaxId,
-                UpdatedAt = c.UpdatedAt ?? DateTime.UtcNow
-            })
-            .FirstOrDefaultAsync();
+    public async Task<ClientDto?> GetByCodeAsync(string code)
+    {
+        var entity = await _db.Clients.AsNoTracking()
+        .FirstOrDefaultAsync(c => c.Code == code);
+        if (entity == null) { return null; }
+        return new ClientDto
+        {
+            Id = entity.Code,
+            Type = entity.Type == 1 ? "supplier" : "customer",
+            Name = entity.Name ?? string.Empty,
+            Email = entity.Email,
+            Phone = entity.Phone,
+            Address = string.Join(" ", new[] { entity.Address1, entity.Address2 }.Where(s => !string.IsNullOrWhiteSpace(s))),
+            TaxId = entity.TaxId,
+            UpdatedAt = entity.UpdatedAt ?? DateTime.UtcNow
+        };
 
+    }
     public async Task UpsertAsync(ClientDto dto)
     {
         var entity = await _db.Clients.FirstOrDefaultAsync(c => c.Code == dto.Id);
