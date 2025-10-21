@@ -11,12 +11,17 @@ public class CatalogDbContext : DbContext
     }
 
     public DbSet<ClientEntity> Clients => Set<ClientEntity>();
+    public DbSet<ProductEntity> Products => Set<ProductEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Índice por código para acceso rápido desde móvil/backend
         modelBuilder.Entity<ClientEntity>()
             .HasIndex(c => c.Code)
+            .IsUnique();
+
+        modelBuilder.Entity<ProductEntity>()
+            .HasIndex(p => p.Code)
             .IsUnique();
     }
 }
