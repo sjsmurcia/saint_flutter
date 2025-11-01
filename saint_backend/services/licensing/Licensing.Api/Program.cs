@@ -1,41 +1,66 @@
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Saint.Licensing.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddLicensingInfrastructure(builder.Configuration);
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var publicKeyPath = builder.Configuration["LicenseJwt:PublicKeyPath"]
+                    ?? "shared/Secrets/license_public.pem";
+var fullPublicPath = ResolvePath(builder.Environment.ContentRootPath, publicKeyPath);
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var pem = File.ReadAllText(fullPublicPath);
+        var rsa = RSA.Create();
+        rsa.ImportFromPem(pem);
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["LicenseJwt:Issuer"] ?? "saint-licensing",
+            ValidAudience = builder.Configuration["LicenseJwt:Audience"] ?? "saint-backend",
+            IssuerSigningKey = new RsaSecurityKey(rsa)
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+static string ResolvePath(string basePath, string configuredPath)
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    if (string.IsNullOrWhiteSpace(configuredPath))
+        throw new InvalidOperationException("LicenseJwt path configuration is missing.");
+
+    if (Path.IsPathRooted(configuredPath))
+        return configuredPath;
+
+    var segments = configuredPath
+        .Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
+
+    var parts = new List<string> { basePath, "..", "..", ".." };
+    parts.AddRange(segments);
+
+    return Path.GetFullPath(Path.Combine(parts.ToArray()));
 }

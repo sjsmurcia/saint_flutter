@@ -33,6 +33,7 @@ Todos los comandos indicados más adelante parten de `repo-root/` (el mismo nive
 ## Estado del modulo Catalogo (Oct 2025)
 - ClientEntity mapea `dbo.SACLIE` (clave `CodClie`) y CatalogDbContext define un indice unico por `Code`.
 - ClientRepository implementa paginacion, filtro `updatedAfter` y upsert contra la base Saint.
+- ProductEntity mapea `dbo.SAPROD` y ProductRepository entrega paginacion, GET/POST (`/catalog/products`, `/catalog/products/{code}`) con mapeo basico (precio, costo, estado).
 - ClientsController expone `GET /catalog/clients`, `GET /catalog/clients/{code}` y `POST /catalog/clients`.
 - LicenseValidationMiddleware exige los encabezados `Authorization` y `X-License-Token`; Swagger registra ambos como definiciones de seguridad para pruebas desde la UI.
 - Endpoints verificados con Postman/Swagger usando tokens dummy (`Authorization: Bearer demo`, `X-License-Token: demo`). Respuesta de ejemplo:
@@ -48,8 +49,15 @@ Todos los comandos indicados más adelante parten de `repo-root/` (el mismo nive
     "updatedAt": "2025-10-12T01:36:47.227"
   }
   ```
-- Pendiente inmediato: validar tokens reales contra Auth/Licensing cuando esten listos y agregar pruebas automatizadas.
-- Siguientes pasos: (1) validar tokens reales contra Auth/Licensing en cuanto esten listos, (2) agregar pruebas automatizadas (repo/controlador), (3) extender el modulo con productos y companias, (4) generar y versionar el OpenAPI resultante.
+ - Pendiente inmediato: validar tokens reales contra Auth/Licensing cuando esten listos y agregar pruebas automatizadas.
+ - Siguientes pasos: (1) validar tokens reales contra Auth/Licensing en cuanto esten listos, (2) agregar pruebas automatizadas (repo/controlador), (3) extender el modulo con productos y companias, (4) generar y versionar el OpenAPI resultante.
+
+## Notas sobre sucursales y correlativos
+- Mantendremos la base como single-empresa: no se agregaran columnas de tenant ni company. Usa los campos existentes (`CodSucu`, `CodEsta`, `CodUbic`, etc.) como identificadores obligatorios de sucursal al exponer datos.
+- Revisa cada tabla relevante (`SACLIE`, `SAPROD`, `SAFACT`, `SACOMP`, `SABANCO`, `SAMOVBAN`, etc.) y documenta el campo que representa sucursal para filtrar en repositorios/endpoints. Los nuevos contratos deben exigir dicho identificador.
+- Para correlativos por sucursal, reutiliza o crea una tabla de secuencias (`SACORRELSIS` o una nueva `DocumentSequences`) que controle `NextNumber` por `(CodSucu, TipoDocumento)`. El backend debe tomar el folio en una transaccion y actualizarlo para evitar colisiones.
+- Ajusta scripts de seed/migraciones para inicializar los correlativos por sucursal y mantenerlos sincronizados con los valores actuales antes de permitir escrituras desde la API.
+
 ---
 
 ## 2. Requisitos previos
